@@ -1,0 +1,34 @@
+.turquoise {
+  width: 230px;
+  display: flex;
+  margin-right: 3px;
+  background: #c55763;
+  border-top: #e57b77 2px solid;
+  border-bottom: #B22222 6px solid;
+  border-left: #B22222 2px solid;
+  border-right: #B22222 2px solid;
+  border-radius: 6px;
+  text-align: center;
+  color: white;
+  padding: 10px;
+  float: right;
+
+  font-size: 20px;
+  font-weight: 600;
+}
+.turquoise:hover {
+  opacity: 0.8;
+}
+.turquoise:active {
+  width: 230px;
+  background: #c55763;
+  border-bottom: #B22222 4px solid;
+  border-left: #B22222 4px solid;
+  border-right: #B22222 4px solid;
+  border-radius: 6px;
+  text-align: center;
+  color: white;
+  padding: 10px;
+  margin-top: 3px;
+
+}

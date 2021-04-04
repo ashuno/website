@@ -18,15 +18,19 @@ def index():
 @app.route('/register')
 def register():
     main_style = url_for('static', filename='css/main_style.css')
-
-    return render_template('register_template.html', main_style=main_style)
+    button_style2 = url_for('static', filename='css/button_style.css')
+    text_style = url_for('static', filename='css/text_style.css')
+    an_style = url_for('static', filename='css/an_style.css')
+    checkbox_style = url_for('static', filename='css/checkbox_style.css')
+    radio_checkbox_style = url_for('static', filename='css/radio_checkbox_style.css')
+    return render_template('register_template.html', main_style=main_style, text_style=text_style, an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style, radio_checkbox_style=radio_checkbox_style)
 
 
 @app.route('/login')
 def login():
     main_style = url_for('static', filename='css/main_style.css')
-
-    return render_template('register_template.html', main_style=main_style)
+    text_style = url_for('static', filename='css/text_style.css')
+    return render_template('register_template.html', main_style=main_style, text_style=text_style)
 
 if __name__ == '__main__':
     app.run(port=8080, host='0.0.0.0')

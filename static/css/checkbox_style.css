@@ -1,0 +1,61 @@
+.checkbox input[type="checkbox"] {
+    opacity: 0;
+
+}
+
+.checkbox label {
+    position: relative;
+    display: flex;
+    padding-left: 25px;
+        color: #ffffff;
+    font-size: 20px;
+}
+
+.checkbox label::before,
+.checkbox label::after {
+    position: absolute;
+    content: "";
+    display: flex;
+}
+
+/*Outer box of the fake checkbox*/
+.checkbox label::before{
+    height: 22px;
+    width: 22px;
+
+    border: 2px outset;
+    left: 0px;
+
+    /*(24px line-height - 16px height of fake checkbox) / 2 - 1px for the border
+     *to vertically center it.
+     */
+    top: 3px;
+}
+
+/*Checkmark of the fake checkbox*/
+.checkbox label::after {
+    height: 7px;
+    width: 11px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+
+    transform: rotate(-45deg);
+
+    left: 5px;
+    top: 8px;
+}
+
+/*Hide the checkmark by default*/
+.checkbox input[type="checkbox"] + label::after {
+    content: none;
+}
+
+/*Unhide on the checked state*/
+.checkbox input[type="checkbox"]:checked + label::after {
+    content: "";
+}
+
+/*Adding focus styles on the outer-box of the fake checkbox*/
+.checkbox input[type="checkbox"]:focus + label::before {
+    outline: #ffee1e auto 5px;
+}

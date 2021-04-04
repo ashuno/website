@@ -4,6 +4,7 @@ H1 {
   font-weight: normal;
   padding: left;
   cursor: pointer;
+  margin: 20 px;
   text-shadow: -8px -8px 0 hsl(353, 49%, 35%),
                -7px -7px 0 hsl(353, 49%, 50%),
                -6px -6px 0 hsl(353, 49%, 65%),

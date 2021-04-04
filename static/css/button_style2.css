@@ -1,8 +1,7 @@
 .turquoise {
   width: 230px;
-  display: inline;
+  display: flex;
   margin-right: 3px;
-  margin-top: 10px;
   background: #c55763;
   border-top: #e57b77 2px solid;
   border-bottom: #B22222 6px solid;
@@ -12,8 +11,7 @@
   text-align: center;
   color: white;
   padding: 10px;
-  float: right;
-
+  float: left;
 
   font-size: 20px;
   font-weight: 600;

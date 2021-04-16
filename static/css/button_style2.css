@@ -1,4 +1,5 @@
 .turquoise {
+position: relative;
   width: 230px;
   display: flex;
   margin-right: 3px;
@@ -20,6 +21,7 @@
   opacity: 0.8;
 }
 .turquoise:active {
+position: relative;
   width: 230px;
   background: #c55763;
   border-bottom: #B22222 4px solid;

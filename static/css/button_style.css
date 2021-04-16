@@ -1,4 +1,6 @@
 .turquoise {
+position: relative;
+
   width: 230px;
   display: inline;
   margin-right: 3px;

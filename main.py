@@ -1,5 +1,4 @@
-from flask import *
-
+from main_users import *
 
 app = Flask(__name__)
 
@@ -27,7 +26,8 @@ def register():
 
         return render_template('register_template.html', main_style=main_style, text_style2=text_style2, an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style, radio_checkbox_style=radio_checkbox_style)
     else:
-        print(request.form)
+        reg(request.form)
+
         return redirect('/choice')
 
 
@@ -45,7 +45,10 @@ def login():
                            button_style2=button_style2, checkbox_style=checkbox_style,
                            radio_checkbox_style=radio_checkbox_style)
     else:
-        print(request.form)
+        # print(request.form)
+        print(request)
+
+
         return redirect('/choice')
 
 

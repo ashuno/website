@@ -13,14 +13,22 @@
 
     <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
         <h1 align="center">Вход</h1>
         <div>
             <form class="login_form" method="post">
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите адрес почты" name="email">
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                       placeholder="Введите адрес почты" name="email">
                 <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
+                {% if email_or_password_doesnt_match == True %}
+                            <span style="text-shadow: #ff6161 1px 0px, #ff6161 1px 1px, #ff6161 0px 1px, #ff6161 -1px 1px,
+                            #ff6161 -1px 0px, #ff6161 -1px -1px, #ff6161 0px -1px, #ff6161 1px -1px, #ff6161 0 0 3px,
+                            #ff6161 0 0 3px, #ff6161 0 0 3px, #ff6161 0 0 3px, #ff6161 0 0 3px, #ff6161 0 0 3px,
+                            #ff6161 0 0 3px, #ff6161 0 0 3px;">Неверно указана почта или пароль!</span>
+                        {% endif %}
 
                 <button type="submit" class="turquoise">Войти</button>
             </form>

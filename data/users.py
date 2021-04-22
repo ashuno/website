@@ -22,7 +22,7 @@ class User(SqlAlchemyBase, UserMixin):
     hobby = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     def __repr__(self):
-        return f'''aaaaaaaaaaaaaa {self.id} {self.name}'''
+        return f'''user {self.id} {self.name} :^)'''
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -36,3 +36,10 @@ class LoginForm(FlaskForm):
     password = PasswordField('Пароль', validators=[DataRequired()])
     remember_me = BooleanField('Запомнить меня')
     submit = SubmitField('Войти')
+
+
+class Hobby(SqlAlchemyBase):
+    __tablename__ = 'hobbies'
+
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
+    name = sqlalchemy.Column(sqlalchemy.String, nullable=True)

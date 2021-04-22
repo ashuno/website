@@ -1,7 +1,7 @@
 import flask_login
 
 from data import db_session
-from data.users import User
+from data.users import User, Hobby
 from flask import *
 from flask_login import LoginManager
 
@@ -23,13 +23,22 @@ def reg(form):
     if user:
         return False
     else:
+        sp_id = []
+        for k, v in form.items():
+            if 'hobby' in k:
+                id = k.replace('hobby', '')
+                sp_id.append(id)
+
+        hobby_ids = '-'.join(sp_id)
+        hobby_ids = '-' + hobby_ids + '-'
+
         user = User()
         user.name = form['name']
         user.age = form['age']
         user.email = form['email']
         user.set_password(form['password'])
         user.about = form['about']
-        # user.hobby = '-4-, -7-, -32-'
+        user.hobby = hobby_ids
         user.gender = form['gender']
         session.add(user)
         session.commit()
@@ -54,50 +63,96 @@ def editing(form):
     if user and user != flask_login.current_user:
         return False
     else:
-        # user = session.query(User).filter(User.id == flask_login.current_user.id).first()
         user.name = form['name']
-        # !!!!!!user.age = form['age']
+        user.age = form['age']
         user.email = form['email']
         if len(form['password']) > 0:
             user.set_password(form['password'])
         user.about = form['about']
-        # user.hobby = '-4-, -7-, -32-'
+        sp_id = []
+        for k, v in form.items():
+            if 'hobby' in k:
+                id = k.replace('hobby', '')
+                sp_id.append(id)
+        hobby_ids = '-'.join(sp_id)
+        hobby_ids = '-' + hobby_ids + '-'
+
+        user.hobby = hobby_ids
         user.gender = form['gender']
-        # session.add(user)
         session.commit()
         return True
 
 
-    # for user in session.query(User).filter(User.hobby.like('%-4-%')):
-    #     print(user)
-    #     user.about = 'tra ta ta'
-    # session.commit()
+def init_hobbies():
+    db_session.global_init("db/users.sqlite")
+    session = db_session.create_session()
+    hobby = Hobby()
+    hobby.name = 'video_editing'
+    hobby.descr = 'Видеомонтаж'
+
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+
+    hobby.descr = 'Дизайн'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Животные'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Игра на музыкальных инструментах'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Игры на компьютерах и приставках'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Иностранные языки'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Коллекционирование'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Моделирование'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Пение'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Программирование'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Рисование'
+    session.add(hobby)
+    session.commit()
+    hobby = Hobby()
+    hobby.descr = 'Спорт'
+    session.add(hobby)
+    session.commit()
 
 
+def get_hobbies():
+    db_session.global_init("db/users.sqlite")
+    session = db_session.create_session()
+    return session.query(Hobby).all()
 
 
+def top_hobbies():
 
-
-# def main():
-#     db_session.global_init("db/users.sqlite")
-#     session = db_session.create_session()
-#
-#     # user = User()
-#     # user.name = "Ridley"
-#     # user.age = 21
-#     # user.email = "scott_chief@mars.org"
-#     # user.set_password("cap")
-#     # user.about = 'aaaaaaaaa'
-#     # user.hobby = '-4-, -7-, -32-'
-#     # user.gender = 'male'
-#     # session.add(user)
-#     #
-#     # session.commit()
-#     for user in session.query(User).filter(User.hobby.like('%-4-%')):
-#         print(user)
-#         user.about = 'tra ta ta'
-#     session.commit()
-#
-#
-# if __name__ == '__main__':
-#     main()
+    db_session.global_init("db/users.sqlite")
+    session = db_session.create_session()
+    hobbies = get_hobbies()
+    sp = []
+    for hobby in hobbies:
+        user_num = session.query(User).filter(User.hobby.like('%-' + str(hobby.id) + '-%')).count()
+        sp.append([hobby.name, user_num])
+    sp = sorted(sp, key=lambda x: x[1], reverse=True)
+    return sp

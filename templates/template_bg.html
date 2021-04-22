@@ -19,7 +19,11 @@
     <div class="post-item-wrap">
     <a href="" class="post-link">
     <h3 class="post-title">Топ интересов зарегистрировавшихся пользователей</h3>
-    <p class="post-content">///</p>
+    <p class="post-content">
+        {% for el in top %}
+        {{el[0]}} {{el[1]}} <br>
+        {% endfor %}
+    </p>
 
     </a>
     </div>

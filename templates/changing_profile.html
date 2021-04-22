@@ -31,7 +31,7 @@
                 <br/>
                 <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
                 <br/>
-                <input class="form-control" id="age" aria-describedby="emailHelp" placeholder="Введите Ваш возраст" name="age"><br/>
+                <input class="form-control" id="age" aria-describedby="emailHelp" placeholder="Введите Ваш возраст" value="{{age}}" name="age"><br/>
 
                 <div class="form-group">
                     <label for="about" class="my_text">Немного о себе</label>
@@ -43,59 +43,26 @@
                 <div class="container">
                     <label class="my_text">Укажите пол</label>
                     <div class="container">
-                      <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                      <input class="form-check-input" type="radio" name="gender" id="male" value="male" {% if gender =='male' %} checked {% endif %}>
                       <label class="form-check-label" for="male">
                         Мужской
                       </label>
                     </div>
                     <div class="container">
-                      <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                      <input class="form-check-input" type="radio" name="gender" id="female" value="female" {% if gender =='female' %} checked {% endif %}>
                       <label class="form-check-label" for="female">
                         Женский
                       </label>
                     </div>
                 </div>
                     <div class="checkbox">
-                        <input type="checkbox" class="form-check-input" id="interest3" name="video_editing">
-                        <label class="form-check-label" for="interest3">Видеомонтаж</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest5" name="design">
-                        <label class="form-check-label" for="interest5">Дизайн</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest7" name="animals">
-                        <label class="form-check-label" for="interest7">Животные</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest8" name="playing_musical_instruments">
-                        <label class="form-check-label" for="interest8">Игра на музыкальных инструментах</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest9" name="games_on_computers_and_consoles">
-                        <label class="form-check-label" for="interest9">Игры на компьютерах и приставках</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest10" name="foreign_languages">
-                        <label class="form-check-label" for="interest10">Иностранные языки</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest11" name="collecting">
-                        <label class="form-check-label" for="interest11">Коллекционирование</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest12" name="modeling">
-                        <label class="form-check-label" for="interest12">Моделирование</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest13" name="singing">
-                        <label class="form-check-label" for="interest13">Пение</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest14" name="programming">
-                        <label class="form-check-label" for="interest14">Программирование</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest15" name="drawing">
-                        <label class="form-check-label" for="interest15">Рисование</label>
-
-                        <input type="checkbox" class="form-check-input" id="interest17" name="sport">
-                        <label class="form-check-label" for="interest17">Спорт</label>
+                        {% for hobby in hobbies %}
+                        <input type="checkbox" class="form-check-input" id="interest{{hobby.id}}" name="hobby{{hobby.id}}" {% if hobby.id|string() in hobby_ids %} checked {% endif %}>
+                        <label class="form-check-label" for="interest{{hobby.id}}">{{hobby.name}}</label>
+                        {% endfor %}
                      </div><br/>
                     <label for="photo" class="my_text">Приложите фотографию</label>
                     <input type="file" class="form-control-file" id="photo" name="file">
-
-
                 <button type="submit" class="turquoise">Применить</button>
             </form>
         </div>

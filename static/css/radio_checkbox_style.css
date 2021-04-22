@@ -1,45 +1,48 @@
-.form-radio-hidden{
-  display: flex;
-  flex-direction: row;
-  height: 28px;
+.payt3 {display: none;}
+[for="payt3"] {
   position: relative;
-  align-items: center;
-}
-.form-radio-hidden input[type="radio"]{
-  opacity: 0;
-}
-
-.form-radio-hidden input:checked + .radio{
-  border-color: #555;
-  background-color: #ffee1e;
-  box-shadow: inset 1px 2px 3px 0 #ffee1e;
-  cursor: default;
-}
-.form-radio-hidden:hover .radio::before, .form-radio-hidden input:checked + .radio::before{
-  content: '';
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 8px;
-  background-color: #ddd;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
-.form-radio-hidden input:checked + .radio::before{
-  background-color: #555;
-  box-shadow: 1px 2px 2px 0 #ffee1e;
-}
-.form-radio-hidden input + .radio + .text{
-  color: #777;
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background: #ddd linear-gradient(#ccc, #fff);
+  box-shadow:
+        inset 0 2px 1px rgba(0,0,0,.15),
+        0 2px 5px rgba(200,200,200,.1);
   cursor: pointer;
-  font-size: 14px;
-  line-height: 1.4;
-  font-family: sans-serif;
-  margin-right: 10px;
-  align-self: center;
 }
-.form-radio-hidden input:checked + .radio + .text{
-  color: #555;
-  cursor: default;
+[for="payt3"]:after {
+  content: "";
+  position: absolute;
+  left: 40%; top: 40%;
+  width: 20%;
+  height: 20%;
+  border-radius: 100%;
+  background: #969696 radial-gradient(40% 35%, #ccc, #969696 60%);
+  box-shadow:
+        inset 0 2px 4px 1px rgba(0,0,0,.3),
+        0 1px 0 rgba(255,255,255,1),
+        inset 0 1px 0 white;
+}
+[for="payt3"]:before {
+  content: "";
+  position: absolute;
+  top: 8%; right: 8%; bottom: 8%; left: 8%;
+  border-radius: 100%;
+  background: #eaeaea;
+  box-shadow:
+        0 3px 5px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.3),
+        inset 0 -5px 5px rgba(100,100,100,.1),
+        inset 0 5px 5px rgba(255,255,255,.3);
+}
+.payt3:checked ~ [for="payt3"]:before {
+  background: #e5e5e5 linear-gradient(#dedede, #fdfdfd);
+}
+.payt3:checked ~ [for="payt3"]:after {
+  background: #25d025 radial-gradient(50% 50%, #fffa6d, #ebd025 60%);
+  box-shadow:
+        inset 0 3px 5px 1px rgba(0,0,0,.1),
+        0 1px 0 rgba(255,255,255,.4),
+        0 0 10px 2px #ebcb2e;
 }

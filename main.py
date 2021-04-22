@@ -10,6 +10,7 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     db_session.global_init("db/users.sqlite")
@@ -24,8 +25,8 @@ def index():
     button_style = url_for('static', filename='css/button_style.css')
     text_style = url_for('static', filename='css/text_style.css')
     ph_style = url_for('static', filename='css/ph_style.css')
-
-    return render_template('template_bg.html', main_style=main_style, style=style, button_style=button_style, text_style=text_style, ph_style=ph_style)
+    top = top_hobbies()
+    return render_template('template_bg.html', top=top,  main_style=main_style, style=style, button_style=button_style, text_style=text_style, ph_style=ph_style)
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -36,14 +37,14 @@ def register():
     an_style = url_for('static', filename='css/an_style.css')
     checkbox_style = url_for('static', filename='css/checkbox_style.css')
     radio_checkbox_style = url_for('static', filename='css/radio_checkbox_style.css')
-
+    hobbies = get_hobbies()
     if request.method == 'GET':
-        return render_template('register_template.html', main_style=main_style, text_style2=text_style2,
+        return render_template('register_template.html', hobbies=hobbies, main_style=main_style, text_style2=text_style2,
                                an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style,
                                radio_checkbox_style=radio_checkbox_style, email_exists=False)
     else:
         if not reg(request.form):
-            return render_template('register_template.html', main_style=main_style, text_style2=text_style2,
+            return render_template('register_template.html', hobbies=hobbies, main_style=main_style, text_style2=text_style2,
                                    an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style,
                                    radio_checkbox_style=radio_checkbox_style, email_exists=True)
 
@@ -126,24 +127,29 @@ def changing_profile():
     an_style = url_for('static', filename='css/an_style.css')
     checkbox_style = url_for('static', filename='css/checkbox_style.css')
     radio_checkbox_style = url_for('static', filename='css/radio_checkbox_style.css')
-
-
     name = flask_login.current_user.name
     email = flask_login.current_user.email
-
-
+    gender = flask_login.current_user.gender
+    age = flask_login.current_user.age
+    hobbies = get_hobbies()
+    print(flask_login.current_user.hobby)
+    hobby_ids = flask_login.current_user.hobby.split('-')
+    print(hobby_ids)
     if request.method == 'GET':
-
-        return render_template('changing_profile.html', name=name, email=email, main_style=main_style, text_style2=text_style2,
-                               an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style,
+        return render_template('changing_profile.html', hobby_ids=hobby_ids, hobbies=hobbies, age=age, gender=gender, name=name, email=email,
+                               main_style=main_style, text_style2=text_style2, an_style=an_style,
+                               button_style2=button_style2, checkbox_style=checkbox_style,
                                radio_checkbox_style=radio_checkbox_style, email_exists=False)
     else:
         if not editing(request.form):
-            return render_template('changing_profile.html', main_style=main_style, text_style2=text_style2,
+            return render_template('changing_profile.html', hobby_ids=hobby_ids, hobbies=hobbies, age=age, gender=gender,
+                                   main_style=main_style, text_style2=text_style2,
                                    an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style,
                                    radio_checkbox_style=radio_checkbox_style, email_exists=True)
         return redirect('/choice')
 
 
 if __name__ == '__main__':
+    top_hobbies()
+    # init_hobbies()
     app.run(port=8080, host='0.0.0.0')

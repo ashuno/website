@@ -1,0 +1,29 @@
+.table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 30px;
+  width: 600px;
+  text-align: left;
+  border-collapse: collapse;
+  background: #c55763;
+  margin: 10px;
+  table-align: center;
+}
+.table th {
+  color: #ffff00;
+  background: #b8364e;
+  border-bottom: 1px solid #fff65d;
+  padding: 20px 57px;
+}
+.table td {
+  color: #efd74e;
+  border-bottom: 1px solid #fff65d;
+  border-right:1px solid #fff65d;
+  padding: 20px 17px;
+}
+.table tr:hover td {
+    cursor: pointer;
+  text-decoration: underline;
+}
+.table tr:active td {
+    cursor: pointer;
+}

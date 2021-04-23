@@ -21,7 +21,7 @@ position: relative;
   opacity: 0.8;
 }
 .turquoise:active {
-position: relative;
+  position: relative;
   width: 230px;
   background: #c55763;
   border-bottom: #B22222 4px solid;
@@ -32,5 +32,4 @@ position: relative;
   color: white;
   padding: 10px;
   margin-top: 3px;
-
 }

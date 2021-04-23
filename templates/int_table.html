@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Люди :^)</title>
+        <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon"/>
+        <link rel="stylesheet" type="text/css" href="{{main_style}}"/>
+        <link rel="stylesheet" type="text/css" href="{{act_table_style}}"/>
+</head>
+<body>
+    <table class="table">
+  <tr>
+    <th>Хобби</th>
+    <th>Количество человек</th>
+    </tr>
+  {% for el in top %}
+  <tr>
+    <td onclick = "document.location.href = '/users_with_hobby/{{el[0]}}'">{{el[1]}}</td>
+    <td onclick = "document.location.href = '/users_with_hobby/{{el[0]}}'">{{el[2]}}</td>
+    </tr>
+  {% endfor %}
+
+  </table>
+</body>
+</html>
+

@@ -74,6 +74,9 @@ def register():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    main_style = url_for('static', filename='css/main_style.css')
+    an_style = url_for('static', filename='css/an_style.css')
+
     if form.validate_on_submit():
         db_session.global_init("db/users.sqlite")
         db_sess = db_session.create_session()
@@ -83,12 +86,12 @@ def login():
             return redirect("/choice")
         return render_template('login_form2.html',
                                message="Неправильный логин или пароль",
-                               form=form)
+                               form=form, main_style=main_style, an_style=an_style)
     return render_template('login_form2.html', title='Авторизация', form=form)
 
 
-@app.route('/me', methods=['POST', 'GET'])
-def profile():
+@app.route('/profile/<user_id>', methods=['POST', 'GET'])
+def profile(user_id):
     print(flask_login.current_user)
     main_style = url_for('static', filename='css/main_style.css')
     an_style = url_for('static', filename='css/an_style.css')
@@ -105,16 +108,19 @@ def profile():
 
 @app.route('/choice')
 def choice():
+    curr_user_id = flask_login.current_user.id
+
     main_style2 = url_for('static', filename='css/main_style2.css')
     button_style2 = url_for('static', filename='css/button_style2.css')
-    return render_template('after_reg.html', button_style2=button_style2, main_style2=main_style2)
+    return render_template('after_reg.html', curr_user_id=curr_user_id, button_style2=button_style2, main_style2=main_style2)
 
 
 @app.route('/people')
 def people():
     main_style = url_for('static', filename='css/main_style.css')
-
-    return render_template('people_temp.html',  main_style=main_style)
+    act_table_style = url_for('static', filename='css/act_table_style.css')
+    top = top_hobbies()
+    return render_template('int_table.html', top=top, main_style=main_style, act_table_style=act_table_style)
 
 
 @app.route('/changing_profile', methods=['POST', 'GET'])
@@ -132,9 +138,7 @@ def changing_profile():
     gender = flask_login.current_user.gender
     age = flask_login.current_user.age
     hobbies = get_hobbies()
-    print(flask_login.current_user.hobby)
     hobby_ids = flask_login.current_user.hobby.split('-')
-    print(hobby_ids)
     if request.method == 'GET':
         return render_template('changing_profile.html', hobby_ids=hobby_ids, hobbies=hobbies, age=age, gender=gender, name=name, email=email,
                                main_style=main_style, text_style2=text_style2, an_style=an_style,
@@ -147,6 +151,17 @@ def changing_profile():
                                    an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style,
                                    radio_checkbox_style=radio_checkbox_style, email_exists=True)
         return redirect('/choice')
+
+
+@app.route('/users_with_hobby/<hobby_id>')
+def users_with_hobby(hobby_id):
+    if not flask_login.current_user.is_authenticated:
+        return redirect('/register')
+    users_sp = get_user_by_hobby(hobby_id)
+    main_style = url_for('static', filename='css/main_style.css')
+    act_table_style = url_for('static', filename='css/act_table_style.css')
+
+    return render_template('users_with_hobby.html', users_sp=users_sp, act_table_style=act_table_style, main_style=main_style)
 
 
 if __name__ == '__main__':

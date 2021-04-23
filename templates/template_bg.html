@@ -13,21 +13,19 @@
     <button class="turquoise" name="login" onclick = "document.location.href = '/login'">Войти</button>
     <button class="turquoise" name="register" onclick = "document.location.href = '/register'">Зарегистрироваться</button>
     <h1>Здесь вы можете найти собеседника по интересам</h1>
-
-
     <div class="post-item">
-    <div class="post-item-wrap">
-    <a href="" class="post-link">
-    <h3 class="post-title">Топ интересов зарегистрировавшихся пользователей</h3>
-    <p class="post-content">
-        {% for el in top %}
-        {{el[0]}} {{el[1]}} <br>
-        {% endfor %}
-    </p>
-
-    </a>
+        <div class="post-item-wrap">
+            <a href="/register" class="post-link">
+            <h3 class="post-title">Топ интересов зарегистрировавшихся пользователей</h3>
+            <h3 class="post-title">/зарегистрируйтесь, чтобы посмотреть/</h3>
+                <p class="post-content">
+                    {% for el in top %}
+                    {{el[0]}} {{el[1]}} <br>
+                    {% endfor %}
+                </p>
+            </a>
+        </div>
     </div>
-    </div>
-    <p><img align="right" src='https://i.gifer.com/4xjK.gif'></p>
+    <p><img align="right" src='static/img/popug.gif'></p>
  </body>
 </html>

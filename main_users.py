@@ -146,13 +146,19 @@ def get_hobbies():
 
 
 def top_hobbies():
-
     db_session.global_init("db/users.sqlite")
     session = db_session.create_session()
     hobbies = get_hobbies()
     sp = []
     for hobby in hobbies:
         user_num = session.query(User).filter(User.hobby.like('%-' + str(hobby.id) + '-%')).count()
-        sp.append([hobby.name, user_num])
-    sp = sorted(sp, key=lambda x: x[1], reverse=True)
+        sp.append([hobby.id, hobby.name, user_num])
+    sp = sorted(sp, key=lambda x: x[2], reverse=True)
     return sp
+
+
+def get_user_by_hobby(hobby_id):
+    db_session.global_init("db/users.sqlite")
+    session = db_session.create_session()
+    users = session.query(User).filter(User.hobby.like('%-' + str(hobby_id) + '-%')).all()
+    return users

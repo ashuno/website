@@ -17,7 +17,6 @@
    position: relative;
 }
 .post-item-wrap:after {
-   content: "";
    position: absolute;
    top: 0;
    left: 0;
@@ -46,19 +45,4 @@
 }
 .post-item-wrap:hover .post-title {
    color: #960009;
-}
-.post-content {
-   color: #A69888;
-   font-size: 14px;
-}
-@media (min-width: 768px) {
-   .post-item {
-      flex-basis: 50%;
-      flex-shrink: 0;
-   }
-}
-@media (min-width: 960px) {
-   .post-item {
-      flex-basis: 33.333333333%;
-   }
 }

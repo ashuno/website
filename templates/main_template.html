@@ -12,11 +12,9 @@
  <body>
 
     {% if current_user.is_authenticated %}
-    <a class="turquoise" name="logout" href="/logout">Выйти</a>
-        <button class="turquoise" onclick = "document.location.href = '/profile/{{curr_user_id}}'">Мой профиль</button>
-
+    <button class="turquoise" name="logout" onclick="document.location.href = '/logout'">Выйти</button>
+    <button class="turquoise" onclick = "document.location.href = '/profile/{{curr_user_id}}'">Мой профиль</button>
     <button class="turquoise" onclick = "document.location.href = '/people'">Найти людей</button>
-
     {% else %}
         <p>
             <button class="turquoise" name="login" onclick = "document.location.href = '/login'">Войти</button>
@@ -33,7 +31,13 @@
             {% endif %}
 
             <h3 class="post-title">Топ интересов зарегистрировавшихся пользователей</h3>
-            <h3 class="post-title">/зарегистрируйтесь, чтобы посмотреть/</h3>
+            {% if current_user.is_authenticated %}
+                <h3 class="post-title">/кликните, чтобы посмотреть подробнее/</h3>
+            {% else %}
+                <h3 class="post-title">/зарегистрируйтесь, чтобы посмотреть подробнее/</h3>
+            {% endif %}
+
+
                 <p class="post-content">
                     {% for el in top %}
                     {{el[1]}} {{el[2]}} <br>

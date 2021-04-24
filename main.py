@@ -30,13 +30,13 @@ def index():
     text_style = url_for('static', filename='css/text_style.css')
     ph_style = url_for('static', filename='css/ph_style.css')
     top = top_hobbies()
-    return render_template('template_bg.html', curr_user_id=curr_user_id, top=top,  main_style=main_style, style=style, button_style=button_style, text_style=text_style, ph_style=ph_style)
+    return render_template('main_template.html', curr_user_id=curr_user_id, top=top,  main_style=main_style, style=style, button_style=button_style, text_style=text_style, ph_style=ph_style)
 
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     main_style = url_for('static', filename='css/main_style.css')
-    button_style2 = url_for('static', filename='css/button_style.css')
+    button_style = url_for('static', filename='css/button_style.css')
     text_style2 = url_for('static', filename='css/text_style2.css')
     an_style = url_for('static', filename='css/an_style.css')
     checkbox_style = url_for('static', filename='css/checkbox_style.css')
@@ -44,12 +44,12 @@ def register():
     hobbies = get_hobbies()
     if request.method == 'GET':
         return render_template('register_template.html', hobbies=hobbies, main_style=main_style, text_style2=text_style2,
-                               an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style,
+                               an_style=an_style, button_style=button_style, checkbox_style=checkbox_style,
                                radio_checkbox_style=radio_checkbox_style, email_exists=False)
     else:
         if not reg(request.form):
             return render_template('register_template.html', hobbies=hobbies, main_style=main_style, text_style2=text_style2,
-                                   an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style,
+                                   an_style=an_style, button_style=button_style, checkbox_style=checkbox_style,
                                    radio_checkbox_style=radio_checkbox_style, email_exists=True)
 
         return redirect('/login')
@@ -151,7 +151,7 @@ def changing_profile():
                                    main_style=main_style, text_style2=text_style2,
                                    an_style=an_style, button_style2=button_style2, checkbox_style=checkbox_style,
                                    radio_checkbox_style=radio_checkbox_style, email_exists=True)
-        return redirect('/choice')
+        return redirect('/profile/' + str(flask_login.current_user.id))
 
 
 @app.route('/users_with_hobby/<hobby_id>')

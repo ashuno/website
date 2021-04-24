@@ -1,4 +1,4 @@
-.turquoise {
+.turquoise2 {
 position: relative;
   width: 230px;
   display: flex;
@@ -17,10 +17,10 @@ position: relative;
   font-size: 20px;
   font-weight: 600;
 }
-.turquoise:hover {
+.turquoise2:hover {
   opacity: 0.8;
 }
-.turquoise:active {
+.turquoise2:active {
   position: relative;
   width: 230px;
   background: #c55763;

@@ -161,4 +161,20 @@ def get_user_by_hobby(hobby_id):
     db_session.global_init("db/users.sqlite")
     session = db_session.create_session()
     users = session.query(User).filter(User.hobby.like('%-' + str(hobby_id) + '-%')).all()
+    print(users)
     return users
+
+
+def get_hobby_by_id(hobby_id):
+    db_session.global_init("db/users.sqlite")
+    session = db_session.create_session()
+    hobby = session.query(Hobby).filter(Hobby.id == hobby_id).first()
+    return hobby
+
+
+def get_user_by_id(user_id):
+    db_session.global_init("db/users.sqlite")
+    session = db_session.create_session()
+    user = session.query(User).filter(User.id == user_id).first()
+    return user
+

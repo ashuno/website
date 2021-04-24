@@ -2,18 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>{{hobby_name}}</title>
         <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon"/>
         <link rel="stylesheet" type="text/css" href="{{main_style}}"/>
             <link rel="stylesheet" type="text/css" href="{{act_table_style}}"/>
+    <link rel="stylesheet" type="text/css" href="{{text_style}}"/>
+
 </head>
 <body>
-  {% for user in user_sp %}
+        <H1>{{hobby_name}}</H1>
+
+    <table class="table">
   <tr>
-    <td onclick = "document.location.href = '/users_with_hobby/{{user.id}}'">{{user.name}}</td>
+    <th>Пользователи с этим интересом</th>
+    </tr>
+  {% for el in users %}
+  <tr>
+    <td onclick = "document.location.href = '/profile/{{el.id}}'">{{el.name}}</td>
     </tr>
   {% endfor %}
+
+  </table>
 </body>
 </html>
 
-users_sp

@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{an_style}}"/>
     <link rel="stylesheet" type="text/css" href="{{checkbox_style}}"/>
     <link rel="stylesheet" type="text/css" href="{{radio_checkbox_style}}"/>
-    <link rel="stylesheet" type="text/css" href="{{button_style2}}"/>
+    <link rel="stylesheet" type="text/css" href="{{button_style}}"/>
 
 
     <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon"/>
@@ -20,7 +20,7 @@
         <h1 align="center">Вход</h1>
         <div>
             <form class="login_form" method="post">
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                <input type="email" class="form-control" id="email"
                        placeholder="Введите адрес почты" name="email">
                 <input type="password" class="form-control" id="password" placeholder="Введите пароль" name="password">
                 {% if email_or_password_doesnt_match == True %}

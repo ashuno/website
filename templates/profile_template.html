@@ -7,23 +7,37 @@
     <link rel="stylesheet" type="text/css" href="{{text_style2}}"/>
     <link rel="stylesheet" type="text/css" href="{{checkbox_style}}"/>
     <link rel="stylesheet" type="text/css" href="{{radio_checkbox_style}}"/>
+    <link rel="stylesheet" type="text/css" href="{{button_style}}"/>
     <link rel="stylesheet" type="text/css" href="{{button_style2}}"/>
+
     <link rel="stylesheet" type="text/css" href="{{ph_style}}"/>
     <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon"/>
 </head>
 <body>
-        <H1>фамилия имя</H1>
+    <button class="turquoise" onclick = "document.location.href = '/'">На главную</button>
+
+        <H1>{{user.name}}</H1>
     <div>
-        <font style="font-family:Lobster, cursive; Font-size:30px;" color="c55763" >емейл</font>
+        <font style="font-family:Lobster, cursive; Font-size:30px;" color="c55763" >{{user.email}}</font>
         <br/>
-        <font style="font-family:Lobster, cursive; Font-size:30px;" color="c55763">возраст: ..., пол: ...</font>
+        <font style="font-family:Lobster, cursive; Font-size:30px;" color="c55763">{{user.age}}, {{user.gender}}</font>
         <br/>
-        <font style="font-family:Lobster, cursive; Font-size:30px;" color="c55763">доп. информация</font>
+        <font style="font-family:Lobster, cursive; Font-size:30px;" color="c55763">{{user.about}}</font>
         <br/>
-        <font style="font-family:Lobster, cursive; Font-size:30px;" color="c55763">список интересов</font>
-        <button class="turquoise" onclick = "document.location.href = '/changing_profile'">Изменить профиль</button>
+        <font style="font-family:Lobster, cursive; Font-size:30px;" color="c55763">Увлечения:</font><br>
+        {% for hobby in hobbies %}
+            <ul>
+             <li><font style="font-family:Lobster, cursive; Font-size:25px;" color="c55763">{{hobby}}</font></li>
+            </ul>
+        {%endfor %}
+
+
+        {% if curr_user_id|string() == user_id|string() %}
+            <button class="turquoise2" onclick = "document.location.href = '/changing_profile'">Изменить профиль</button>
+        {% endif %}
 
 </div>
 
 </body>
 </html>
+

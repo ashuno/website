@@ -1,11 +1,10 @@
 H1 {
   margin-left: 30px;
     margin-top: 30px;
-
+  cursor: default;
   max-width: 60%;
   font-size: 50px;
   padding: left;
-  cursor: pointer;
   margin: 20 px;
   text-shadow: -8px -8px 0 hsl(353, 49%, 35%),
                -7px -7px 0 hsl(353, 49%, 50%),

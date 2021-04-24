@@ -2,18 +2,6 @@ import flask_login
 
 from data import db_session
 from data.users import User, Hobby
-from flask import *
-from flask_login import LoginManager
-
-# app = Flask(__name__)
-# login_manager = LoginManager()
-# login_manager.init_app(app)
-#
-#
-# @login_manager.user_loader
-# def load_user(user_id):
-#     db_sess = db_session.create_session()
-#     return db_sess.query(User).get(user_id)
 
 
 def reg(form):
@@ -83,62 +71,6 @@ def editing(form):
         return True
 
 
-def init_hobbies():
-    db_session.global_init("db/users.sqlite")
-    session = db_session.create_session()
-    hobby = Hobby()
-    hobby.name = 'video_editing'
-    hobby.descr = 'Видеомонтаж'
-
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-
-    hobby.descr = 'Дизайн'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Животные'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Игра на музыкальных инструментах'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Игры на компьютерах и приставках'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Иностранные языки'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Коллекционирование'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Моделирование'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Пение'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Программирование'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Рисование'
-    session.add(hobby)
-    session.commit()
-    hobby = Hobby()
-    hobby.descr = 'Спорт'
-    session.add(hobby)
-    session.commit()
-
-
 def get_hobbies():
     db_session.global_init("db/users.sqlite")
     session = db_session.create_session()
@@ -161,7 +93,6 @@ def get_user_by_hobby(hobby_id):
     db_session.global_init("db/users.sqlite")
     session = db_session.create_session()
     users = session.query(User).filter(User.hobby.like('%-' + str(hobby_id) + '-%')).all()
-    print(users)
     return users
 
 

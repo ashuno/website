@@ -1,5 +1,4 @@
-import flask_login
-
+from flask import *
 from main_users import *
 from flask_login import LoginManager, login_user, login_required, logout_user
 from data.users import LoginForm
@@ -30,7 +29,8 @@ def index():
     text_style = url_for('static', filename='css/text_style.css')
     ph_style = url_for('static', filename='css/ph_style.css')
     top = top_hobbies()
-    return render_template('main_template.html', curr_user_id=curr_user_id, top=top,  main_style=main_style, style=style, button_style=button_style, text_style=text_style, ph_style=ph_style)
+    return render_template('main_template.html', curr_user_id=curr_user_id, top=top, main_style=main_style, style=style,
+                           button_style=button_style, text_style=text_style, ph_style=ph_style)
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -43,12 +43,14 @@ def register():
     radio_checkbox_style = url_for('static', filename='css/radio_checkbox_style.css')
     hobbies = get_hobbies()
     if request.method == 'GET':
-        return render_template('register_template.html', hobbies=hobbies, main_style=main_style, text_style2=text_style2,
+        return render_template('register_template.html', hobbies=hobbies, main_style=main_style,
+                               text_style2=text_style2,
                                an_style=an_style, button_style=button_style, checkbox_style=checkbox_style,
                                radio_checkbox_style=radio_checkbox_style, email_exists=False)
     else:
         if not reg(request.form):
-            return render_template('register_template.html', hobbies=hobbies, main_style=main_style, text_style2=text_style2,
+            return render_template('register_template.html', hobbies=hobbies, main_style=main_style,
+                                   text_style2=text_style2,
                                    an_style=an_style, button_style=button_style, checkbox_style=checkbox_style,
                                    radio_checkbox_style=radio_checkbox_style, email_exists=True)
 
@@ -72,9 +74,10 @@ def login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
-        return render_template('login_form2.html', message="Неправильный логин или пароль", form=form, main_style=main_style, text_style=text_style, an_style=an_style,
-                                       button_style=button_style, checkbox_style=checkbox_style,
-                                       radio_checkbox_style=radio_checkbox_style)
+        return render_template('login_form2.html', message="Неправильный логин или пароль", form=form,
+                               main_style=main_style, text_style=text_style, an_style=an_style,
+                               button_style=button_style, checkbox_style=checkbox_style,
+                               radio_checkbox_style=radio_checkbox_style)
 
     return render_template('login_form2.html', form=form,
                            main_style=main_style, text_style=text_style, an_style=an_style,
@@ -86,16 +89,11 @@ def login():
 def profile(user_id):
     curr_user_id = flask_login.current_user.id
     user = get_user_by_id(user_id)
-    print(user)
-    print(user.about)
     hobby_ids = user.hobby.split('-')
-    print(hobby_ids)
     hobbies = []
     for hobby_id in hobby_ids[1:-1]:
         hobby = get_hobby_by_id(hobby_id)
-
         hobbies.append(hobby.name)
-    print(flask_login.current_user)
     main_style = url_for('static', filename='css/main_style.css')
     an_style = url_for('static', filename='css/an_style.css')
     ph_style = url_for('static', filename='css/ph_style.css')
@@ -104,19 +102,11 @@ def profile(user_id):
     button_style2 = url_for('static', filename='css/button_style2.css')
 
     if request.method == 'GET':
-        return render_template('profile_template.html', button_style2=button_style2, hobbies=hobbies, user=user, user_id=user_id, curr_user_id=curr_user_id, main_style=main_style, an_style=an_style, ph_style=ph_style, text_style2=text_style2, button_style=button_style)
+        return render_template('profile_template.html', button_style2=button_style2, hobbies=hobbies, user=user,
+                               user_id=user_id, curr_user_id=curr_user_id, main_style=main_style, an_style=an_style,
+                               ph_style=ph_style, text_style2=text_style2, button_style=button_style)
     else:
-
         return redirect('/changing_profile')
-
-#
-# @app.route('/choice')
-# def choice():
-#     curr_user_id = flask_login.current_user.id
-#
-#     main_style2 = url_for('static', filename='css/main_style2.css')
-#     button_style2 = url_for('static', filename='css/button_style2.css')
-#     return render_template('after_reg.html', curr_user_id=curr_user_id, button_style2=button_style2, main_style2=main_style2)
 
 
 @app.route('/people')
@@ -130,7 +120,7 @@ def people():
 @app.route('/changing_profile', methods=['POST', 'GET'])
 def changing_profile():
     if not flask_login.current_user.is_authenticated:
-        return '>:('
+        return redirect('/register')
     main_style = url_for('static', filename='css/main_style.css')
     button_style2 = url_for('static', filename='css/button_style.css')
     text_style2 = url_for('static', filename='css/text_style2.css')
@@ -164,7 +154,8 @@ def users_with_hobby(hobby_id):
     hobby_name = get_hobby_by_id(hobby_id).name
     text_style = url_for('static', filename='css/text_style.css')
     users = get_user_by_hobby(hobby_id)
-    return render_template('users_with_hobby.html', users=users, text_style=text_style, hobby_name=hobby_name, users_sp=users_sp, act_table_style=act_table_style, main_style=main_style)
+    return render_template('users_with_hobby.html', users=users, text_style=text_style, hobby_name=hobby_name,
+                           users_sp=users_sp, act_table_style=act_table_style, main_style=main_style)
 
 
 @app.route('/logout')
@@ -175,6 +166,4 @@ def logout():
 
 
 if __name__ == '__main__':
-    top_hobbies()
-    # init_hobbies()
     app.run(port=8080, host='0.0.0.0')
